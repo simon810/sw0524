@@ -21,7 +21,6 @@ public class ToolTypeServiceImpl implements ToolTypeService {
     @Override
     public ToolTypeResponse insert(ToolTypeRequest toolTypeRequest) {
         var toolType = mapToEntity(toolTypeRequest);
-
         return mapToDto(toolTypeRepository.save(toolType));
     }
 

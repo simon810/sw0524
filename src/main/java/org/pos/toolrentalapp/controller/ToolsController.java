@@ -1,6 +1,10 @@
 package org.pos.toolrentalapp.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.pos.toolrentalapp.exception.ToolsException;
 import org.pos.toolrentalapp.requestDto.ToolsRequest;
@@ -27,6 +31,22 @@ public class ToolsController {
 
     @PostMapping("/insert")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(
+            summary = "Add a new tool",
+            description = "Add a new tool with the specified details",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Tool request",
+                    required = true,
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ToolsRequest.class),
+                            examples = @ExampleObject(
+                                    name = "example",
+                                    value = "{ \"toolCode\": \"TestCode\", \"brand\": \"TestBrand\", \"toolType\": \"Jackhammer\" }"
+                            )
+                    )
+            )
+    )
     public ToolsResponse insertTool(@RequestBody ToolsRequest toolsRequest) throws ToolsException {
         return toolsService.insert(toolsRequest);
     }

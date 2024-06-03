@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.pos.toolrentalapp.util.ToolTypeName;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,7 +16,7 @@ import java.time.LocalDate;
 public class RentalAgreementRequest {
     private Integer rentalAgreementId;
     private String toolCode;
-    private ToolTypeName toolType;
+    private String toolType;
     private String brand;
     private Integer rentalDays;
     private LocalDate checkoutDate;

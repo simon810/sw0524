@@ -1,5 +1,5 @@
-package org.pos.toolrentalapp.util;
-
-public enum ToolTypeName {
-    Chainsaw,Ladder,Jackhammer;
-}
+//package org.pos.toolrentalapp.util;
+//
+//public enum ToolTypeName {
+//    Chainsaw,Ladder,Jackhammer;
+//}

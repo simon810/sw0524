@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
-import org.pos.toolrentalapp.util.ToolTypeName;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,7 +17,7 @@ public class RentalAgreement {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer rentalAgreementId;
     private String toolCode;
-    private ToolTypeName toolType;
+    private String toolType;
     private String brand;
     private Integer rentalDays;
     private LocalDate checkoutDate;
