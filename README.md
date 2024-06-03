@@ -1,8 +1,8 @@
 # sw0524
 
 ## Documentation
-http://localhost:8080
-http://localhost:8080/swagger-ui/index.html
+. http://localhost:8080
+. http://localhost:8080/swagger-ui/index.html
 
 ## Test Cases
 package org.pos.toolrentalapp.service.impl.CheckoutServiceImplTest;   Holds all 6 Test Cases and prints
