@@ -4,9 +4,9 @@ spring:
   application:
     name: tool-rental
   datasource:
-    url: jdbc:postgresql://localhost:5432/tools_rental_db
-    username: user
-    password: 123
+    url: jdbc:postgresql://localhost:5432/${DB_NAME}
+    username: ${USER_NAME}
+    password: ${PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
