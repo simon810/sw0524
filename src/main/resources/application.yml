@@ -1,0 +1,45 @@
+#spring.application.name=tool-rental
+
+spring:
+  application:
+    name: tool-rental
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tools_rental_db
+    username: user
+    password: 123
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+
+
+
+
+#logging:
+#  level:
+#    com:
+#      zaxxer:
+#        hikari: Info
+#    org:
+#      springframework:
+#        jdbc:
+#          core:
+#            org.springframework.jdbc.core.JdbcTemplate: DEBUG
+#
+#      hibernate:
+#        sql: debug
+#server:
+#  port: 9000
+#
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  server:
+#    port: 9090

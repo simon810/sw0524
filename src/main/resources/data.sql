@@ -1,0 +1,2 @@
+-- INSERT INTO tools_rental_db.public.tool_type  (tool_type_id,tool_type_name, daily_charge, week_day_charge, week_end_charge, holiday_charge)
+-- VALUES (1,'Ladder', 1.99, true, true, false);
