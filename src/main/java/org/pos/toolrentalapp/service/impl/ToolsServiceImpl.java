@@ -4,11 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.pos.toolrentalapp.entity.Tool;
 import org.pos.toolrentalapp.entity.ToolType;
 import org.pos.toolrentalapp.exception.ToolsException;
+import org.pos.toolrentalapp.repository.ToolTypeRepository;
 import org.pos.toolrentalapp.repository.ToolsRespository;
 import org.pos.toolrentalapp.requestDto.ToolsRequest;
 import org.pos.toolrentalapp.responseDto.ToolTypeResponse;
 import org.pos.toolrentalapp.responseDto.ToolsResponse;
-import org.pos.toolrentalapp.service.ToolTypeService;
 import org.pos.toolrentalapp.service.ToolsService;
 import org.pos.toolrentalapp.util.Charge;
 import org.springframework.stereotype.Service;
@@ -20,18 +20,19 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ToolsServiceImpl implements ToolsService {
 
-
     private final ToolsRespository toolsRespository;
-    private final ToolTypeService toolTypeService;
 
-    public ToolsServiceImpl(ToolsRespository toolsRespository, ToolTypeService toolTypeService) {
+    private final ToolTypeRepository toolTypeRepository;
+
+    public ToolsServiceImpl(ToolsRespository toolsRespository, ToolTypeRepository toolTypeRepository) {
         this.toolsRespository = toolsRespository;
-        this.toolTypeService = toolTypeService;
+        this.toolTypeRepository = toolTypeRepository;
     }
 
     @Override
     public ToolsResponse insert(ToolsRequest toolsRequest) throws ToolsException {
-        ToolTypeResponse toolType = toolTypeService.findByToolTypeName(toolsRequest.getToolTypeName());
+        ToolType toolType = toolTypeRepository.findToolTypeByToolTypeName(toolsRequest.getToolTypeName())
+                .orElseThrow(() -> new ToolsException("Tool Type Name:  "+ toolsRequest.getToolTypeName()+"  not Existed!!"));
 
         Tool tool = mapToEntity(toolsRequest, toolType);
         return mapToDto(toolsRespository.save(tool));
@@ -75,15 +76,7 @@ public class ToolsServiceImpl implements ToolsService {
         return toolsResponse;
     }
 
-    private Tool mapToEntity(ToolsRequest toolsRequest, ToolTypeResponse toolTypeResponse) {
-
-        ToolType toolType = new ToolType();
-        toolType.setToolTypeName(toolTypeResponse.getToolTypeName());
-        toolType.setDailyCharge(toolTypeResponse.getDailyCharge());
-        toolType.setHolidayCharge(toolTypeResponse.getHolidayCharge().equals(Charge.Yes));
-        toolType.setWeekEndCharge(toolTypeResponse.getWeekEndCharge().equals(Charge.Yes));
-        toolType.setWeekDayCharge(toolTypeResponse.getWeekDayCharge().equals(Charge.Yes));
-
+    private Tool mapToEntity(ToolsRequest toolsRequest, ToolType toolType) {
         return new Tool(toolsRequest.getId(), toolsRequest.getToolCode(), toolsRequest.getBrand(), toolType);
     }
 

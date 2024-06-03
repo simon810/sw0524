@@ -8,7 +8,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @RestControllerAdvice
@@ -38,14 +37,5 @@ public class GlobalExceptionHandler {
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .toList());
     }
-
-
-    @ExceptionHandler(DateTimeParseException.class)
-    public ResponseEntity<String> handleDateTimeParseException(DateTimeParseException ex) {
-        ToolsException exception=new ToolsException("Provide date as: MM/dd/yyyy",ex);
-        System.out.println("Invoked+++++++++++++++++++");
-        return ResponseEntity.badRequest().body(exception.getLocalizedMessage());
-    }
-
 }
 
